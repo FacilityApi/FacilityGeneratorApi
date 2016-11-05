@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Facility.Definition;
+using Facility.Definition.Fsd;
 using Facility.GeneratorApi.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,62 +17,53 @@ namespace Facility.GeneratorApi.WebApi.Controllers
 		public IActionResult Post([FromBody] GenerateRequestDto request)
 		{
 			if (request == null)
-				return BadRequest();
+				return BadRequest(new { message = "Missing JSON request." });
 			if (request.Definition?.Text == null)
-				return BadRequest();
+				return BadRequest(new { message = "Definition text required." });
 
-			var generatorName = request.Generator?.Name;
-			switch (generatorName)
+			try
 			{
-			case "reflect":
-				return GenerateReflect(request.Definition);
-			case "test":
-				return GenerateTest(request.Definition);
-			default:
-				return BadRequest();
+				var service = new FsdParser().ParseDefinition(new ServiceTextSource(request.Definition.Text).WithName(request.Definition.Name));
+
+				var generatorName = request.Generator?.Name;
+				switch (generatorName)
+				{
+				case "fsd":
+					return GenerateFsd(service);
+				default:
+					return BadRequest(new { message = $"Unrecognized generator '{generatorName}'." });
+				}
+			}
+			catch (ServiceDefinitionException exception)
+			{
+				return Ok(new GenerateResponseDto
+				{
+					ParseError = new ParseErrorDto
+					{
+						Message = exception.Error,
+						Line = exception.Position.LineNumber,
+						Column = exception.Position.ColumnNumber,
+					},
+				});
 			}
 		}
 
-		private IActionResult GenerateReflect(TextSourceDto definition)
+		private IActionResult GenerateFsd(ServiceInfo service)
 		{
-			return Ok(new GenerateResponseDto
+			var generator = new FsdGenerator
 			{
-				Output = new[]
-				{
-					new TextSourceDto
-					{
-						Name = "README",
-						Text = "This test generator simply reflects the source as-is.",
-					},
-					definition,
-				},
-			});
-		}
+				GeneratorName = "fsdgenapi",
+			};
+			var output = generator.GenerateOutput(service);
 
-		private IActionResult GenerateTest(TextSourceDto definition)
-		{
 			return Ok(new GenerateResponseDto
 			{
 				Output = new[]
 				{
 					new TextSourceDto
 					{
-						Name = "README.md",
-						Text = string.Join(Environment.NewLine,
-							"# Test Generator",
-							"",
-							"This test generator generates bogus data in a number of file formats. This paragraph has some unnecessary words at the end so that we can see what happens with long lines.",
-							""),
-					},
-					new TextSourceDto
-					{
-						Name = "Api.cs",
-						Text = string.Join(Environment.NewLine,
-							"public static class Api",
-							"{",
-							"\tpublic static string Test => \"This is a test string that is long enough to go off the edge.\";",
-							"}",
-							""),
+						Name = output.Name,
+						Text = output.Text,
 					},
 				},
 			});
