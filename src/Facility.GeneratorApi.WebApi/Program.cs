@@ -10,7 +10,7 @@ namespace Facility.GeneratorApi.WebApi
 			var host = new WebHostBuilder()
 				.UseKestrel()
 				.UseContentRoot(Directory.GetCurrentDirectory())
-				.UseUrls("http://local.fsdgenapi.facility.io:45054")
+				.UseUrls("http://0.0.0.0:45054")
 				.UseIISIntegration()
 				.UseStartup<Startup>()
 				.Build();
