@@ -28,7 +28,7 @@ namespace Facility.GeneratorApi.WebApi.Controllers
 
 			try
 			{
-				var service = new FsdParser().ParseDefinition(new ServiceTextSource(request.Definition.Text).WithName(request.Definition.Name));
+				var service = new FsdParser().ParseDefinition(new NamedText(request.Definition.Name + ".fsd", request.Definition.Text));
 
 				var generatorName = request.Generator?.Name;
 				switch (generatorName)
@@ -36,7 +36,7 @@ namespace Facility.GeneratorApi.WebApi.Controllers
 				case "csharp":
 					return GenerateCode(() => new CSharpGenerator(), g => g.GenerateOutput(service));
 				case "fsd":
-					return GenerateCode(() => new FsdGenerator(), g => new[] { g.GenerateOutput(service) });
+					return GenerateCode(() => new FsdGenerator(), g => g.GenerateOutput(service));
 				default:
 					return BadRequest(new { message = $"Unrecognized generator '{generatorName}'." });
 				}
@@ -55,7 +55,7 @@ namespace Facility.GeneratorApi.WebApi.Controllers
 			}
 		}
 
-		private IActionResult GenerateCode<T>(Func<T> createGenerator, Func<T, IEnumerable<ServiceTextSource>> generateOutput)
+		private IActionResult GenerateCode<T>(Func<T> createGenerator, Func<T, CodeGenOutput> generateOutput)
 			where T : CodeGenerator
 		{
 			var generator = createGenerator();
@@ -64,6 +64,7 @@ namespace Facility.GeneratorApi.WebApi.Controllers
 			return Ok(new GenerateResponseDto
 			{
 				Output = generateOutput(generator)
+					.NamedTexts
 					.Select(x => new TextSourceDto
 					{
 						Name = x.Name,
