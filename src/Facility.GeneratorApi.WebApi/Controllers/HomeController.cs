@@ -6,6 +6,7 @@ using Facility.Definition;
 using Facility.Definition.CodeGen;
 using Facility.Definition.Fsd;
 using Facility.GeneratorApi.WebApi.Models;
+using Facility.JavaScript;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Facility.GeneratorApi.WebApi.Controllers
@@ -35,6 +36,10 @@ namespace Facility.GeneratorApi.WebApi.Controllers
 				{
 				case "csharp":
 					return GenerateCode(() => new CSharpGenerator(), g => g.GenerateOutput(service));
+				case "javascript":
+					return GenerateCode(() => new JavaScriptGenerator(), g => g.GenerateOutput(service));
+				case "typescript":
+					return GenerateCode(() => new JavaScriptGenerator { TypeScript = true }, g => g.GenerateOutput(service));
 				case "fsd":
 					return GenerateCode(() => new FsdGenerator(), g => g.GenerateOutput(service));
 				default:
