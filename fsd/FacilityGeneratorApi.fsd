@@ -1,0 +1,45 @@
+/// Generates code from Facility Service Definitions.
+service FacilityGeneratorApi
+{
+	/// Generates code from a service definition.
+	method generate
+	{
+		/// The service definition.
+		definition: NamedText;
+
+		/// The generator to use.
+		generator: Generator;
+	}:
+	{
+		/// The output from the generator.
+		output: NamedText[];
+
+		/// The failure, if any.
+		failure: Failure;
+	}
+
+	/// A named text.
+	data NamedText
+	{
+		/// The name.
+		name: string;
+
+		/// The text.
+		text: string;
+	}
+
+	/// A generator.
+	data Generator
+	{
+		/// The name of the generator.
+		name: string;
+	}
+
+	/// A parse or generate failure.
+	data Failure
+	{
+		line: int32;
+		column: int32;
+		message: string;
+	}
+}

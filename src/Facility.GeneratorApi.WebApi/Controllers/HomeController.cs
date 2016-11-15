@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Facility.CSharp;
 using Facility.Definition;
@@ -53,7 +52,7 @@ namespace Facility.GeneratorApi.WebApi.Controllers
 			{
 				return Ok(new GenerateResponseDto
 				{
-					ParseError = new ParseErrorDto
+					Failure = new FailureDto
 					{
 						Message = exception.Error,
 						Line = exception.Position.LineNumber,
@@ -73,7 +72,7 @@ namespace Facility.GeneratorApi.WebApi.Controllers
 			{
 				Output = generateOutput(generator)
 					.NamedTexts
-					.Select(x => new TextSourceDto
+					.Select(x => new NamedTextDto
 					{
 						Name = x.Name,
 						Text = x.Text,
