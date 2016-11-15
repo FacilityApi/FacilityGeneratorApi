@@ -25,6 +25,7 @@ namespace Facility.GeneratorApi.WebApi
 		{
 			services.AddCors();
 			services.AddMvc()
+				.AddWebApiConventions()
 				.AddJsonOptions(options =>
 				{
 					var serializerSettings = options.SerializerSettings;

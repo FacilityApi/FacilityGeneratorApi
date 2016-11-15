@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
-using Facility.CSharp;
-using Facility.Definition;
-using Facility.Definition.CodeGen;
-using Facility.Definition.Fsd;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Facility.Core.Http;
 using Facility.GeneratorApi.WebApi.Models;
-using Facility.JavaScript;
-using Facility.Markdown;
+using Facility.GeneratorApi.WebApi.Models.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Facility.GeneratorApi.WebApi.Controllers
@@ -20,64 +18,21 @@ namespace Facility.GeneratorApi.WebApi.Controllers
 		}
 
 		[HttpPost("generate")]
-		public IActionResult Post([FromBody] GenerateRequestDto request)
+		public async Task<HttpResponseMessage> Generate(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
-			if (request == null)
-				return BadRequest(new { message = "Missing JSON request." });
-			if (request.Definition?.Text == null)
-				return BadRequest(new { message = "Definition text required." });
-
-			try
-			{
-				var service = new FsdParser().ParseDefinition(new NamedText(request.Definition.Name + ".fsd", request.Definition.Text));
-
-				var generatorName = request.Generator?.Name;
-				switch (generatorName)
-				{
-				case "csharp":
-					return GenerateCode(() => new CSharpGenerator(), g => g.GenerateOutput(service));
-				case "javascript":
-					return GenerateCode(() => new JavaScriptGenerator(), g => g.GenerateOutput(service));
-				case "typescript":
-					return GenerateCode(() => new JavaScriptGenerator { TypeScript = true }, g => g.GenerateOutput(service));
-				case "markdown":
-					return GenerateCode(() => new MarkdownGenerator(), g => g.GenerateOutput(service));
-				case "fsd":
-					return GenerateCode(() => new FsdGenerator(), g => g.GenerateOutput(service));
-				default:
-					return BadRequest(new { message = $"Unrecognized generator '{generatorName}'." });
-				}
-			}
-			catch (ServiceDefinitionException exception)
-			{
-				return Ok(new GenerateResponseDto
-				{
-					Failure = new FailureDto
-					{
-						Message = exception.Error,
-						Line = exception.Position.LineNumber,
-						Column = exception.Position.ColumnNumber,
-					},
-				});
-			}
+			var response = await GetServiceHttpHandler().TryHandleGenerateAsync(request, cancellationToken).ConfigureAwait(false);
+			if (response == null)
+				throw new InvalidOperationException("Failed to handle request.");
+			return response;
 		}
 
-		private IActionResult GenerateCode<T>(Func<T> createGenerator, Func<T, CodeGenOutput> generateOutput)
-			where T : CodeGenerator
+		private FacilityGeneratorApiHttpHandler GetServiceHttpHandler()
 		{
-			var generator = createGenerator();
-			generator.GeneratorName = "fsdgenapi";
-
-			return Ok(new GenerateResponseDto
-			{
-				Output = generateOutput(generator)
-					.NamedTexts
-					.Select(x => new NamedTextDto
-					{
-						Name = x.Name,
-						Text = x.Text,
-					}).ToList(),
-			});
+			return new FacilityGeneratorApiHttpHandler(new FacilityGeneratorApi(),
+				new ServiceHttpHandlerSettings
+				{
+					RootPath = HttpContext.Request.PathBase,
+				});
 		}
 	}
 }

@@ -18,7 +18,8 @@
     "Facility.CSharp": "0.1.3",
     "Facility.JavaScript": "0.1.3",
     "Facility.Markdown": "0.1.0",
-    "Facility.Core": "0.1.4"
+    "Facility.Core": "0.1.4",
+    "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.0.0"
   },
 
   "tools": {
