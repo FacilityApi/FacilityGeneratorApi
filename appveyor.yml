@@ -4,7 +4,6 @@ configuration: Release
 install:
 - cmd: |-
     dotnet restore
-    dotnet build src/Facility.GeneratorApi.WebApi
 build_script:
 - cmd: |-
     dotnet build src\Facility.GeneratorApi.WebApi --configuration Release
