@@ -1,10 +1,6 @@
 version: '{build}'
 image: Visual Studio 2015
 configuration: Release
-install:
-- cmd: |-
-    dotnet restore
 build_script:
-- cmd: |-
-    dotnet build src\Facility.GeneratorApi.WebApi --configuration Release
+- ps: .\build.ps1 -target=Build
 test: off
