@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Facility.Core.Http;
+using Facility.GeneratorApi.WebApi.Models;
+using Facility.GeneratorApi.WebApi.Models.Http;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace Facility.GeneratorApi.WebApi
 {
@@ -24,16 +27,10 @@ namespace Facility.GeneratorApi.WebApi
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddCors();
-			services.AddMvc()
-				.AddWebApiConventions()
-				.AddJsonOptions(options =>
-				{
-					var serializerSettings = options.SerializerSettings;
-					serializerSettings.NullValueHandling = NullValueHandling.Ignore;
-					serializerSettings.DateParseHandling = DateParseHandling.None;
-					serializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
-					serializerSettings.MetadataPropertyHandling = MetadataPropertyHandling.Ignore;
-				});
+
+			services.AddSingleton<IFacilityGeneratorApi, FacilityGeneratorApi>();
+			services.AddSingleton<ServiceHttpHandlerSettings>();
+			services.AddSingleton<FacilityGeneratorApiHttpHandler>();
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -42,7 +39,22 @@ namespace Facility.GeneratorApi.WebApi
 			loggerFactory.AddDebug();
 
 			app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-			app.UseMvc();
+
+			app.UseFacilityHttpHandler<FacilityGeneratorApiHttpHandler>();
+
+			app.Use(async (context, next) =>
+			{
+				var request = context.Request;
+				if (request.Method == "GET" && request.Path == "/")
+				{
+					context.Response.ContentType = "application/json";
+					await context.Response.WriteAsync("{\"api\":\"fsdgenapi\"}").ConfigureAwait(false);
+				}
+				else
+				{
+					await next().ConfigureAwait(false);
+				}
+			});
 		}
 	}
 }
