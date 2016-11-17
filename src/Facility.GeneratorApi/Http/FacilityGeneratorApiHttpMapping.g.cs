@@ -9,7 +9,7 @@ using Facility.Core.Http;
 
 #pragma warning disable 612 // member is obsolete
 
-namespace Facility.GeneratorApi.WebApi.Models.Http
+namespace Facility.GeneratorApi.Http
 {
 	/// <summary>
 	/// Generates code from Facility Service Definitions.

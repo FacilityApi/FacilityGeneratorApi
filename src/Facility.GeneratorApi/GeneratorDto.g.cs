@@ -5,39 +5,33 @@ using Facility.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Facility.GeneratorApi.WebApi.Models
+namespace Facility.GeneratorApi
 {
 	/// <summary>
-	/// A named text.
+	/// A generator.
 	/// </summary>
 	[System.CodeDom.Compiler.GeneratedCode("fsdgencsharp", "")]
-	public sealed partial class NamedTextDto : ServiceDto<NamedTextDto>
+	public sealed partial class GeneratorDto : ServiceDto<GeneratorDto>
 	{
 		/// <summary>
 		/// Creates an instance.
 		/// </summary>
-		public NamedTextDto()
+		public GeneratorDto()
 		{
 		}
 
 		/// <summary>
-		/// The name.
+		/// The name of the generator.
 		/// </summary>
 		public string Name { get; set; }
 
 		/// <summary>
-		/// The text.
-		/// </summary>
-		public string Text { get; set; }
-
-		/// <summary>
 		/// Determines if two DTOs are equivalent.
 		/// </summary>
-		public override bool IsEquivalentTo(NamedTextDto other)
+		public override bool IsEquivalentTo(GeneratorDto other)
 		{
 			return other != null &&
-				Name == other.Name &&
-				Text == other.Text;
+				Name == other.Name;
 		}
 	}
 }

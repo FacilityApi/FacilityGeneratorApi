@@ -1,4 +1,5 @@
 /// Generates code from Facility Service Definitions.
+[csharp(namespace: Facility.GeneratorApi)]
 service FacilityGeneratorApi
 {
 	/// Generates code from a service definition.

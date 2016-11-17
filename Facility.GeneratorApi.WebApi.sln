@@ -7,10 +7,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{3115FAA4-6
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		build.cake = build.cake
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Facility.GeneratorApi.WebApi", "src\Facility.GeneratorApi.WebApi\Facility.GeneratorApi.WebApi.xproj", "{246F6910-989A-4551-86C0-1F34EF85C0BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fsd", "fsd", "{77EDAF05-3951-41CB-B9D8-CB135D324692}"
+	ProjectSection(SolutionItems) = preProject
+		fsd\FacilityGeneratorApi.fsd = fsd\FacilityGeneratorApi.fsd
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Facility.GeneratorApi", "src\Facility.GeneratorApi\Facility.GeneratorApi.xproj", "{467D7B5D-FC7A-4044-93A5-F1190D4A14F4}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Facility.GeneratorApi.Services", "src\Facility.GeneratorApi.Services\Facility.GeneratorApi.Services.xproj", "{12C7D650-8918-4A04-9591-C656EA0476A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +32,14 @@ Global
 		{246F6910-989A-4551-86C0-1F34EF85C0BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{246F6910-989A-4551-86C0-1F34EF85C0BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{246F6910-989A-4551-86C0-1F34EF85C0BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{467D7B5D-FC7A-4044-93A5-F1190D4A14F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{467D7B5D-FC7A-4044-93A5-F1190D4A14F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{467D7B5D-FC7A-4044-93A5-F1190D4A14F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{467D7B5D-FC7A-4044-93A5-F1190D4A14F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C7D650-8918-4A04-9591-C656EA0476A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C7D650-8918-4A04-9591-C656EA0476A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C7D650-8918-4A04-9591-C656EA0476A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C7D650-8918-4A04-9591-C656EA0476A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

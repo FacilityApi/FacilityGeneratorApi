@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Facility.Core;
 
-namespace Facility.GeneratorApi.WebApi.Models
+namespace Facility.GeneratorApi
 {
 	/// <summary>
 	/// Generates code from Facility Service Definitions.

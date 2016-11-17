@@ -8,7 +8,7 @@ var solutionFileName = "FacilityGeneratorApi.sln";
 void CodeGen(bool verify)
 {
 	ExecuteProcess($@"cake\fsdgencsharp\tools\fsdgencsharp.exe",
-		@"fsd\FacilityGeneratorApi.fsd src\Facility.GeneratorApi.WebApi\Models --clean --namespace Facility.GeneratorApi.WebApi.Models" + (verify ? " --verify" : ""));
+		@"fsd\FacilityGeneratorApi.fsd src\Facility.GeneratorApi --clean" + (verify ? " --verify" : ""));
 }
 
 Task("CodeGen")

@@ -14,11 +14,7 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "Facility.Definition": "0.1.8",
-    "Facility.CSharp": "0.1.3",
-    "Facility.JavaScript": "0.1.3",
-    "Facility.Markdown": "0.1.0",
-    "Facility.Core": "0.1.4"
+    "Facility.GeneratorApi.Services": "0.1.0-*"
   },
 
   "tools": {

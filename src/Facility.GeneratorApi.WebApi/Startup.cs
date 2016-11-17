@@ -1,6 +1,6 @@
 ﻿using Facility.Core.Http;
-using Facility.GeneratorApi.WebApi.Models;
-using Facility.GeneratorApi.WebApi.Models.Http;
+using Facility.GeneratorApi.Http;
+using Facility.GeneratorApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

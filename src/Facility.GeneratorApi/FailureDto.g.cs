@@ -5,7 +5,7 @@ using Facility.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Facility.GeneratorApi.WebApi.Models
+namespace Facility.GeneratorApi
 {
 	/// <summary>
 	/// A parse or generate failure.

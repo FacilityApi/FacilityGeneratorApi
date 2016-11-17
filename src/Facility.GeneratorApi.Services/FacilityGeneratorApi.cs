@@ -12,7 +12,7 @@ using Facility.Markdown;
 
 #pragma warning disable 1998
 
-namespace Facility.GeneratorApi.WebApi.Models
+namespace Facility.GeneratorApi.Services
 {
 	public sealed class FacilityGeneratorApi : IFacilityGeneratorApi
 	{
