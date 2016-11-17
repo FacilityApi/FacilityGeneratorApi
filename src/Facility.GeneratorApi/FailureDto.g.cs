@@ -20,10 +20,19 @@ namespace Facility.GeneratorApi
 		{
 		}
 
+		/// <summary>
+		/// The line number of the failure.
+		/// </summary>
 		public int? Line { get; set; }
 
+		/// <summary>
+		/// The column number of the failure.
+		/// </summary>
 		public int? Column { get; set; }
 
+		/// <summary>
+		/// The failure message.
+		/// </summary>
 		public string Message { get; set; }
 
 		/// <summary>

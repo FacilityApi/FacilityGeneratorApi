@@ -39,8 +39,13 @@ service FacilityGeneratorApi
 	/// A parse or generate failure.
 	data Failure
 	{
+		/// The line number of the failure.
 		line: int32;
+
+		/// The column number of the failure.
 		column: int32;
+
+		/// The failure message.
 		message: string;
 	}
 }
