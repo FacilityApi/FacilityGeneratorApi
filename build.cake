@@ -32,10 +32,16 @@ Task("VerifyCodeGen")
 Task("Build")
 	.IsDependentOn("VerifyCodeGen")
 	.Does(() =>
-  {
-    DotNetCoreRestore("src/Facility.GeneratorApi.WebApi");
-    DotNetCoreBuild("src/Facility.GeneratorApi.WebApi", new DotNetCoreBuildSettings { Configuration = configuration });
-  });
+	{
+		DotNetCoreRestore("src/Facility.GeneratorApi");
+		DotNetCoreRestore("src/Facility.GeneratorApi.Services");
+		DotNetCoreRestore("src/Facility.GeneratorApi.WebApi");
+
+		var buildSettings = new DotNetCoreBuildSettings { Configuration = configuration };
+		DotNetCoreBuild("src/Facility.GeneratorApi", buildSettings);
+		DotNetCoreBuild("src/Facility.GeneratorApi.Services", buildSettings);
+		DotNetCoreBuild("src/Facility.GeneratorApi.WebApi", buildSettings);
+	});
 
 Task("Default")
 	.IsDependentOn("Build");
