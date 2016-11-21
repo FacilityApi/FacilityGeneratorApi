@@ -53,7 +53,7 @@ export interface IFailure {
 	message?: string;
 }
 
-const { fetchResponse, createResponseError } = HttpClientUtility;
+const { fetchResponse, createResponseError, createRequiredRequestFieldError } = HttpClientUtility;
 type IFetch = HttpClientUtility.IFetch;
 type IFetchRequest = HttpClientUtility.IFetchRequest;
 
