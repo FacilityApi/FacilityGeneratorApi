@@ -1,4 +1,5 @@
-#tool "nuget:?package=fsdgencsharp"
+#tool "nuget:https://www.nuget.org/api/v2/?package=fsdgencsharp"
+#tool "nuget:https://www.nuget.org/api/v2/?package=fsdgenjs"
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
@@ -7,8 +8,11 @@ var solutionFileName = "FacilityGeneratorApi.sln";
 
 void CodeGen(bool verify)
 {
-	ExecuteProcess($@"cake\fsdgencsharp\tools\fsdgencsharp.exe",
-		@"fsd\FacilityGeneratorApi.fsd src\Facility.GeneratorApi --clean" + (verify ? " --verify" : ""));
+	string verifyOption = verify ? "--verify" : "";
+	ExecuteProcess(@"cake\fsdgencsharp\tools\fsdgencsharp.exe",
+		$@"fsd\FacilityGeneratorApi.fsd src\Facility.GeneratorApi\ --clean {verifyOption}");
+	ExecuteProcess(@"cake\fsdgenjs\tools\fsdgenjs.exe",
+		$@"fsd\FacilityGeneratorApi.fsd ts\src\ --typescript {verifyOption}");
 }
 
 Task("CodeGen")
