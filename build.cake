@@ -4,8 +4,6 @@
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
-var solutionFileName = "FacilityGeneratorApi.sln";
-
 void CodeGen(bool verify)
 {
 	string verifyOption = verify ? "--verify" : "";
