@@ -4,6 +4,7 @@ A web API for generating code from Facility service definitions.
 
 [![Build Status](https://travis-ci.org/FacilityApi/FacilityGeneratorApi.svg?branch=master)](https://travis-ci.org/FacilityApi/FacilityGeneratorApi)
 [![Build Status](https://ci.appveyor.com/api/projects/status/d3ig3wshd8y59lq0?svg=true)](https://ci.appveyor.com/project/ejball/facilitygeneratorapi)
+[![Docker Build](https://img.shields.io/docker/automated/facilityapi/facility-generator-api.svg)](https://hub.docker.com/r/facilityapi/facility-generator-api/)
 
 ## facility-generator-api
 
