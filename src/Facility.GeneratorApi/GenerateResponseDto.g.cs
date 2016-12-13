@@ -36,7 +36,7 @@ namespace Facility.GeneratorApi
 		public override bool IsEquivalentTo(GenerateResponseDto other)
 		{
 			return other != null &&
-				ServiceDataUtility.AreEquivalentArrays(Output, other.Output, ServiceDataUtility.AreEquivalentDtos) &&
+				ServiceDataUtility.AreEquivalentFieldValues(Output, other.Output) &&
 				ServiceDataUtility.AreEquivalentDtos(Failure, other.Failure);
 		}
 	}
