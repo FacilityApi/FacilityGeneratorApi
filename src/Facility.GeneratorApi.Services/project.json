@@ -1,12 +1,12 @@
-﻿{
+{
   "version": "0.1.0-*",
 
   "dependencies": {
-    "Facility.CSharp": "0.1.3",
-    "Facility.Definition": "0.1.8",
+    "Facility.CSharp": "0.2.0",
+    "Facility.Definition": "0.2.0",
     "Facility.GeneratorApi": "0.1.0-*",
-    "Facility.JavaScript": "0.1.3",
-    "Facility.Markdown": "0.1.0",
+    "Facility.JavaScript": "0.2.0",
+    "Facility.Markdown": "0.2.0",
     "NETStandard.Library": "1.6.0"
   },
 

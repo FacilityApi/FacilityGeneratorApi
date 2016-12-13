@@ -7,6 +7,7 @@ using Facility.CSharp;
 using Facility.Definition;
 using Facility.Definition.CodeGen;
 using Facility.Definition.Fsd;
+using Facility.Definition.Swagger;
 using Facility.JavaScript;
 using Facility.Markdown;
 
@@ -41,6 +42,10 @@ namespace Facility.GeneratorApi.Services
 					return ServiceResult.Success(GenerateCode(() => new MarkdownGenerator(), g => g.GenerateOutput(service)));
 				case "fsd":
 					return ServiceResult.Success(GenerateCode(() => new FsdGenerator(), g => g.GenerateOutput(service)));
+				case "swagger-json":
+					return ServiceResult.Success(GenerateCode(() => new SwaggerGenerator(), g => g.GenerateOutput(service)));
+				case "swagger-yaml":
+					return ServiceResult.Success(GenerateCode(() => new SwaggerGenerator { Yaml = true }, g => g.GenerateOutput(service)));
 				default:
 					return ServiceResult.Failure(ServiceErrors.CreateInvalidRequest($"Unrecognized generator '{generatorName}'."));
 				}
@@ -64,6 +69,8 @@ namespace Facility.GeneratorApi.Services
 		{
 			var generator = createGenerator();
 			generator.GeneratorName = "fsdgenapi";
+			generator.IndentText = "  ";
+			generator.NewLine = "\n";
 
 			return new GenerateResponseDto
 			{
