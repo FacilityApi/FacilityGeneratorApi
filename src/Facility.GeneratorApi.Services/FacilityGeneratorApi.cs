@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Facility.Core;
@@ -17,6 +18,20 @@ namespace Facility.GeneratorApi.Services
 {
 	public sealed class FacilityGeneratorApi : IFacilityGeneratorApi
 	{
+		public Task<ServiceResult<GetApiInfoResponseDto>> GetApiInfoAsync(GetApiInfoRequestDto request, CancellationToken cancellationToken)
+		{
+			if (request == null)
+				throw new ArgumentNullException(nameof(request));
+
+			var version = GetType().GetTypeInfo().Assembly.GetName().Version;
+
+			return Task.FromResult(ServiceResult.Success(new GetApiInfoResponseDto
+			{
+				Api = "fsdgenapi",
+				Version = $"{version.Major}.{version.Minor}.{version.Build}",
+			}));
+		}
+
 		public async Task<ServiceResult<GenerateResponseDto>> GenerateAsync(GenerateRequestDto request, CancellationToken cancellationToken)
 		{
 			if (request == null)

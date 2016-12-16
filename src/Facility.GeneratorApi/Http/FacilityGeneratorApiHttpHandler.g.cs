@@ -31,7 +31,16 @@ namespace Facility.GeneratorApi.Http
 		/// </summary>
 		public override async Task<HttpResponseMessage> TryHandleHttpRequestAsync(HttpRequestMessage httpRequest, CancellationToken cancellationToken)
 		{
-			return await AdaptTask(TryHandleGenerateAsync(httpRequest, cancellationToken)).ConfigureAwait(true);
+			return await AdaptTask(TryHandleGetApiInfoAsync(httpRequest, cancellationToken)).ConfigureAwait(true) ??
+				await AdaptTask(TryHandleGenerateAsync(httpRequest, cancellationToken)).ConfigureAwait(true);
+		}
+
+		/// <summary>
+		/// Gets information about the API.
+		/// </summary>
+		public Task<HttpResponseMessage> TryHandleGetApiInfoAsync(HttpRequestMessage httpRequest, CancellationToken cancellationToken)
+		{
+			return TryHandleServiceMethodAsync(FacilityGeneratorApiHttpMapping.GetApiInfoMapping, httpRequest, m_service.GetApiInfoAsync, cancellationToken);
 		}
 
 		/// <summary>

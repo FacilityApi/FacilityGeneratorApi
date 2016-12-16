@@ -3,7 +3,6 @@ using Facility.GeneratorApi.Http;
 using Facility.GeneratorApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -39,22 +38,7 @@ namespace Facility.GeneratorApi.WebApi
 			loggerFactory.AddDebug();
 
 			app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
 			app.UseFacilityHttpHandler<FacilityGeneratorApiHttpHandler>();
-
-			app.Use(async (context, next) =>
-			{
-				var request = context.Request;
-				if (request.Method == "GET" && request.Path == "/")
-				{
-					context.Response.ContentType = "application/json";
-					await context.Response.WriteAsync("{\"api\":\"fsdgenapi\"}").ConfigureAwait(false);
-				}
-				else
-				{
-					await next().ConfigureAwait(false);
-				}
-			});
 		}
 	}
 }

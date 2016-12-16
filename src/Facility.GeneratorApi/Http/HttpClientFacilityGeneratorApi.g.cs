@@ -22,6 +22,14 @@ namespace Facility.GeneratorApi.Http
 		}
 
 		/// <summary>
+		/// Gets information about the API.
+		/// </summary>
+		public Task<ServiceResult<GetApiInfoResponseDto>> GetApiInfoAsync(GetApiInfoRequestDto request, CancellationToken cancellationToken)
+		{
+			return TrySendRequestAsync(FacilityGeneratorApiHttpMapping.GetApiInfoMapping, request, cancellationToken);
+		}
+
+		/// <summary>
 		/// Generates code from a service definition.
 		/// </summary>
 		public Task<ServiceResult<GenerateResponseDto>> GenerateAsync(GenerateRequestDto request, CancellationToken cancellationToken)

@@ -18,6 +18,24 @@ namespace Facility.GeneratorApi.Http
 	public static partial class FacilityGeneratorApiHttpMapping
 	{
 		/// <summary>
+		/// Gets information about the API.
+		/// </summary>
+		public static readonly HttpMethodMapping<GetApiInfoRequestDto, GetApiInfoResponseDto> GetApiInfoMapping =
+			new HttpMethodMapping<GetApiInfoRequestDto, GetApiInfoResponseDto>.Builder
+			{
+				HttpMethod = HttpMethod.Get,
+				Path = "/",
+				ResponseMappings =
+				{
+					new HttpResponseMapping<GetApiInfoResponseDto>.Builder
+					{
+						StatusCode = (HttpStatusCode) 200,
+						ResponseBodyType = typeof(GetApiInfoResponseDto),
+					}.Build(),
+				},
+			}.Build();
+
+		/// <summary>
 		/// Generates code from a service definition.
 		/// </summary>
 		public static readonly HttpMethodMapping<GenerateRequestDto, GenerateResponseDto> GenerateMapping =

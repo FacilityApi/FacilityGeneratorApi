@@ -2,6 +2,19 @@
 [csharp(namespace: Facility.GeneratorApi)]
 service FacilityGeneratorApi
 {
+	/// Gets information about the API.
+	[http(method: GET, path: "/")]
+	method getApiInfo
+	{
+	}:
+	{
+		/// The API name.
+		api: string;
+
+		/// The API version.
+		version: string;
+	}
+
 	/// Generates code from a service definition.
 	method generate
 	{

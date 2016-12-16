@@ -13,6 +13,11 @@ namespace Facility.GeneratorApi
 	public partial interface IFacilityGeneratorApi
 	{
 		/// <summary>
+		/// Gets information about the API.
+		/// </summary>
+		Task<ServiceResult<GetApiInfoResponseDto>> GetApiInfoAsync(GetApiInfoRequestDto request, CancellationToken cancellationToken);
+
+		/// <summary>
 		/// Generates code from a service definition.
 		/// </summary>
 		Task<ServiceResult<GenerateResponseDto>> GenerateAsync(GenerateRequestDto request, CancellationToken cancellationToken);

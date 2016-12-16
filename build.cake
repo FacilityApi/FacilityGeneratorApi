@@ -1,5 +1,5 @@
-#tool "nuget:https://www.nuget.org/api/v2/?package=fsdgencsharp"
-#tool "nuget:https://www.nuget.org/api/v2/?package=fsdgenjs"
+#tool "nuget:https://www.nuget.org/api/v2/?package=fsdgencsharp&version=0.2.0"
+#tool "nuget:https://www.nuget.org/api/v2/?package=fsdgenjs&version=0.2.0"
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");

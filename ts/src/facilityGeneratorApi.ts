@@ -9,8 +9,22 @@ export function createHttpClient({ fetch, baseUri }: IHttpClientOptions): IFacil
 
 /** Generates code from Facility Service Definitions. */
 export interface IFacilityGeneratorApi {
+	/** Gets information about the API. */
+	getApiInfo(request: IGetApiInfoRequest): Promise<IServiceResult<IGetApiInfoResponse>>;
 	/** Generates code from a service definition. */
 	generate(request: IGenerateRequest): Promise<IServiceResult<IGenerateResponse>>;
+}
+
+/** Request for GetApiInfo. */
+export interface IGetApiInfoRequest {
+}
+
+/** Response for GetApiInfo. */
+export interface IGetApiInfoResponse {
+	/** The API name. */
+	api?: string;
+	/** The API version. */
+	version?: string;
 }
 
 /** Request for Generate. */
@@ -70,6 +84,27 @@ class FacilityGeneratorApiHttpClient implements IFacilityGeneratorApi {
 		}
 		this._fetch = fetch;
 		this._baseUri = baseUri;
+	}
+	/** Gets information about the API. */
+	public getApiInfo(request: IGetApiInfoRequest): Promise<IServiceResult<IGetApiInfoResponse>> {
+		const uri = '';
+		const fetchRequest: IFetchRequest = {
+			method: 'GET'
+		};
+		return fetchResponse(this._fetch, this._baseUri + uri, fetchRequest)
+			.then(result => {
+				const status = result.response.status;
+				let value: IGetApiInfoResponse = null;
+				if (result.json) {
+					if (status === 200 || status === 204) {
+						value = result.json;
+					}
+				}
+				if (!value) {
+					return createResponseError(status, result.json) as IServiceResult<IGetApiInfoResponse>;
+				}
+				return { value: value };
+			});
 	}
 	/** Generates code from a service definition. */
 	public generate(request: IGenerateRequest): Promise<IServiceResult<IGenerateResponse>> {
