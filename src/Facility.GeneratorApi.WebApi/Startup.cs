@@ -37,6 +37,7 @@ namespace Facility.GeneratorApi.WebApi
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
 
+			app.UseDeveloperExceptionPage();
 			app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 			app.UseFacilityHttpHandler<FacilityGeneratorApiHttpHandler>();
 		}

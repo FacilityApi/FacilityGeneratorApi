@@ -61,6 +61,8 @@ namespace Facility.GeneratorApi.Services
 					return ServiceResult.Success(GenerateCode(() => new SwaggerGenerator(), g => g.GenerateOutput(service)));
 				case "swagger-yaml":
 					return ServiceResult.Success(GenerateCode(() => new SwaggerGenerator { Yaml = true }, g => g.GenerateOutput(service)));
+				case "crash":
+					throw new InvalidOperationException("Intentional exception for diagnostic purposes.");
 				default:
 					return ServiceResult.Failure(ServiceErrors.CreateInvalidRequest($"Unrecognized generator '{generatorName}'."));
 				}
