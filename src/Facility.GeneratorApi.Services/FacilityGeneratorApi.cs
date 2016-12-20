@@ -37,12 +37,11 @@ namespace Facility.GeneratorApi.Services
 			if (request == null)
 				throw new ArgumentNullException(nameof(request));
 
-			if (request.Definition?.Text == null)
-				return ServiceResult.Failure(ServiceErrors.CreateInvalidRequest("Definition text required."));
-
 			try
 			{
-				var service = new FsdParser().ParseDefinition(new NamedText(request.Definition.Name + ".fsd", request.Definition.Text));
+				var input = new NamedText(request.Definition?.Name ?? "", request.Definition?.Text ?? "");
+				bool isSwagger = ServiceDefinitionUtility.DetectFormat(input) == ServiceDefinitionFormat.Swagger;
+				var service = isSwagger ? new SwaggerParser().ParseDefinition(input) : new FsdParser().ParseDefinition(input);
 
 				var generatorName = request.Generator?.Name;
 				switch (generatorName)
