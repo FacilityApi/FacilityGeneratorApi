@@ -1,4 +1,5 @@
-﻿using Facility.Core.Http;
+﻿using Facility.Core;
+using Facility.Core.Http;
 using Facility.GeneratorApi.Http;
 using Facility.GeneratorApi.Services;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +31,9 @@ namespace Facility.GeneratorApi.WebApi
 			services.AddSingleton<IFacilityGeneratorApi, FacilityGeneratorApi>();
 			services.AddSingleton<ServiceHttpHandlerSettings>();
 			services.AddSingleton<FacilityGeneratorApiHttpHandler>();
+
+			services.AddMvc()
+				.AddJsonOptions(options => ServiceJsonUtility.ApplyJsonSerializerSettings(options.SerializerSettings));
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -40,6 +44,7 @@ namespace Facility.GeneratorApi.WebApi
 			app.UseDeveloperExceptionPage();
 			app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 			app.UseFacilityHttpHandler<FacilityGeneratorApiHttpHandler>();
+			app.UseMvc();
 		}
 	}
 }
