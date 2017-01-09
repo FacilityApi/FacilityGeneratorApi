@@ -2,7 +2,7 @@
   "version": "0.1.0-*",
 
   "dependencies": {
-    "Facility.Core": "0.2.0",
+    "Facility.Core": "0.3.2",
     "NETStandard.Library": "1.6.0"
   },
 

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Facility.AspNet;
 using Facility.Core;
 using Facility.CSharp;
 using Facility.Definition;
@@ -60,6 +61,8 @@ namespace Facility.GeneratorApi.Services
 					return ServiceResult.Success(GenerateCode(() => new SwaggerGenerator(), g => g.GenerateOutput(service)));
 				case "swagger-yaml":
 					return ServiceResult.Success(GenerateCode(() => new SwaggerGenerator { Yaml = true }, g => g.GenerateOutput(service)));
+				case "asp-net-web-api":
+					return ServiceResult.Success(GenerateCode(() => new AspNetGenerator(), g => g.GenerateOutput(service)));
 				case "crash":
 					throw new InvalidOperationException("Intentional exception for diagnostic purposes.");
 				default:
