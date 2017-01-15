@@ -3,15 +3,15 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Facility.AspNet;
+using Facility.CodeGen.AspNet;
+using Facility.CodeGen.CSharp;
+using Facility.CodeGen.JavaScript;
+using Facility.CodeGen.Markdown;
 using Facility.Core;
-using Facility.CSharp;
 using Facility.Definition;
 using Facility.Definition.CodeGen;
 using Facility.Definition.Fsd;
 using Facility.Definition.Swagger;
-using Facility.JavaScript;
-using Facility.Markdown;
 
 #pragma warning disable 1998
 
