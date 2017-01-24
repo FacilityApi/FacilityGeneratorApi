@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Facility.Core;
 using Facility.Core.Http;
 using Microsoft.AspNetCore.Http;
 
@@ -56,9 +59,21 @@ namespace Facility.GeneratorApi.WebApi
 					requestMessage.Content.Headers.TryAddWithoutValidation(header.Key, header.Value.AsEnumerable());
 			}
 
-			using (var responseMessage = await m_handler.TryHandleHttpRequestAsync(requestMessage, httpContext.RequestAborted).ConfigureAwait(false))
+			HttpResponseMessage responseMessage;
+			try
 			{
-				if (responseMessage != null)
+				responseMessage = await m_handler.TryHandleHttpRequestAsync(requestMessage, httpContext.RequestAborted).ConfigureAwait(false);
+			}
+			catch (Exception exception)
+			{
+				var error = ServiceErrorUtility.CreateInternalErrorForException(exception);
+				var statusCode = HttpServiceErrors.TryGetHttpStatusCode(error.Code) ?? HttpStatusCode.InternalServerError;
+				responseMessage = new HttpResponseMessage(statusCode) { Content = JsonHttpContentSerializer.Instance.CreateHttpContent(error) };
+			}
+
+			if (responseMessage != null)
+			{
+				using (responseMessage)
 				{
 					var response = httpContext.Response;
 					response.StatusCode = (int) responseMessage.StatusCode;
@@ -88,10 +103,10 @@ namespace Facility.GeneratorApi.WebApi
 						await responseMessage.Content.CopyToAsync(response.Body).ConfigureAwait(false);
 					}
 				}
-				else
-				{
-					await m_next(httpContext).ConfigureAwait(false);
-				}
+			}
+			else
+			{
+				await m_next(httpContext).ConfigureAwait(false);
 			}
 		}
 
