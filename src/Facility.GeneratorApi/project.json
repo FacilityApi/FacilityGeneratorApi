@@ -1,8 +1,8 @@
 {
-  "version": "0.1.0-*",
+  "version": "0.4.0-*",
 
   "dependencies": {
-    "Facility.Core": "0.4.2",
+    "Facility.Core": "1.2.0",
     "NETStandard.Library": "1.6.0"
   },
 
