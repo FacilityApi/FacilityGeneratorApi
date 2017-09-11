@@ -1,6 +1,6 @@
 {
   "name": "facility-generator-api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A web API client for generating code from Facility service definitions.",
   "scripts": {
     "build": "tsc"
@@ -20,6 +20,6 @@
     "typescript": "^2.0.9"
   },
   "dependencies": {
-    "facility-core": "^0.2.1"
+    "facility-core": "^1.0.1"
   }
 }
