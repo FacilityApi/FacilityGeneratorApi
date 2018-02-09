@@ -1,0 +1,14 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: generator-api
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/ingress.global-static-ip-name: fsdgenapi-faithlife-com
+spec:
+  tls:
+  - secretName: star.faithlife.com
+  backend:
+    serviceName: generator-api
+    servicePort: 80
