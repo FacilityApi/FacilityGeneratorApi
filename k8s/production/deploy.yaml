@@ -1,0 +1,39 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: generator-api
+spec:
+  template:
+    metadata:
+      labels:
+        app: facility
+        role: generator-api
+      name: generator-api
+    spec:
+      containers:
+      - name: generator-api
+        image: facilityapi/facility-generator-api:$VERSION
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 45054
+        resources:
+          requests:
+            memory: 512Mi
+            cpu: 100m
+          limits:
+            memory: 1Gi
+            cpu: "1"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 45054
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 45054
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      restartPolicy: Always
