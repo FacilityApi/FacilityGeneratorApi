@@ -1,1 +1,7 @@
-* text=auto
+* text=auto eol=lf
+
+*.cs text diff=csharp
+*.csproj text merge=union
+*.sln text merge=union
+
+*.g.cs linguist-generated=true

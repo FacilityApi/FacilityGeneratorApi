@@ -1,25 +1,26 @@
 {
   "name": "facility-generator-api",
-  "version": "0.1.1",
-  "description": "A web API client for generating code from Facility service definitions.",
+  "version": "0.5.0",
+  "description": "A web API client for generating code from Facility Service Definitions.",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prep": "npm install && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/FacilityApi/FacilityGeneratorApi.git"
   },
   "author": "Ed Ball",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "files": [
-    "src"
+    "dist"
   ],
-  "main": "src/facilityGeneratorApi.js",
-  "types": "src/facilityGeneratorApi.d.ts",
+  "main": "dist/facilityGeneratorApi.js",
+  "types": "dist/facilityGeneratorApi.d.ts",
   "devDependencies": {
-    "typescript": "^2.0.9"
+    "typescript": "^3.9.10"
   },
   "dependencies": {
-    "facility-core": "^1.0.1"
+    "facility-core": "^2.2.0"
   }
 }

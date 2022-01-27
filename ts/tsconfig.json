@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5",
+    "target": "es6",
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "newLine": "LF",
     "declaration": true,
     "sourceMap": true,
-    "lib": [ "es2015.promise", "es5" ]
+    "inlineSources": true,
+    "outDir": "dist"
   },
   "include": [
     "src/*.ts"

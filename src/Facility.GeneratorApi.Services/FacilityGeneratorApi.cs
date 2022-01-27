@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using Facility.CodeGen.AspNet;
 using Facility.CodeGen.CSharp;
 using Facility.CodeGen.JavaScript;
@@ -12,8 +8,6 @@ using Facility.Definition;
 using Facility.Definition.CodeGen;
 using Facility.Definition.Fsd;
 using Facility.Definition.Swagger;
-
-#pragma warning disable 1998
 
 namespace Facility.GeneratorApi.Services
 {
@@ -40,8 +34,8 @@ namespace Facility.GeneratorApi.Services
 
 			try
 			{
-				var input = new NamedText(request.Definition?.Name ?? "", request.Definition?.Text ?? "");
-				bool isSwagger = ServiceDefinitionUtility.DetectFormat(input) == ServiceDefinitionFormat.Swagger;
+				var input = new ServiceDefinitionText(request.Definition?.Name ?? "", request.Definition?.Text ?? "");
+				var isSwagger = input.Text.StartsWith("{", StringComparison.Ordinal) || input.Text.StartsWith("swagger:", StringComparison.Ordinal);
 				var service = isSwagger ? new SwaggerParser().ParseDefinition(input) : new FsdParser().ParseDefinition(input);
 
 				var generatorName = request.Generator?.Name;
@@ -58,9 +52,9 @@ namespace Facility.GeneratorApi.Services
 				case "fsd":
 					return ServiceResult.Success(GenerateCode(() => new FsdGenerator(), g => g.GenerateOutput(service)));
 				case "swagger-json":
-					return ServiceResult.Success(GenerateCode(() => new SwaggerGenerator(), g => g.GenerateOutput(service)));
+					return ServiceResult.Success(GenerateCode(() => new SwaggerGenerator { GeneratesJson = true }, g => g.GenerateOutput(service)));
 				case "swagger-yaml":
-					return ServiceResult.Success(GenerateCode(() => new SwaggerGenerator { Yaml = true }, g => g.GenerateOutput(service)));
+					return ServiceResult.Success(GenerateCode(() => new SwaggerGenerator(), g => g.GenerateOutput(service)));
 				case "asp-net-web-api":
 					return ServiceResult.Success(GenerateCode(() => new AspNetGenerator(), g => g.GenerateOutput(service)));
 				case "crash":
@@ -71,13 +65,14 @@ namespace Facility.GeneratorApi.Services
 			}
 			catch (ServiceDefinitionException exception)
 			{
+				var error = exception.Errors[0];
 				return ServiceResult.Success(new GenerateResponseDto
 				{
 					Failure = new FailureDto
 					{
-						Message = exception.Error,
-						Line = exception.Position.LineNumber,
-						Column = exception.Position.ColumnNumber,
+						Message = error.Message,
+						Line = error.Position?.LineNumber,
+						Column = error.Position?.ColumnNumber,
 					},
 				});
 			}
@@ -94,7 +89,7 @@ namespace Facility.GeneratorApi.Services
 			return new GenerateResponseDto
 			{
 				Output = generateOutput(generator)
-					.NamedTexts
+					.Files
 					.Select(x => new NamedTextDto
 					{
 						Name = x.Name,
