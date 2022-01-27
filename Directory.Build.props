@@ -10,7 +10,7 @@
     <NoWarn>$(NoWarn);1591;1998;NU5105;CA1014;CA1508</NoWarn>
     <DebugType>embedded</DebugType>
     <GitHubOrganization>FacilityApi</GitHubOrganization>
-    <RepositoryName>FacilityAspNet</RepositoryName>
+    <RepositoryName>FacilityGeneratorApi</RepositoryName>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/$(GitHubOrganization)/$(RepositoryName)</PackageProjectUrl>
     <PackageReleaseNotes>https://github.com/$(GitHubOrganization)/$(RepositoryName)/blob/master/ReleaseNotes.md</PackageReleaseNotes>
