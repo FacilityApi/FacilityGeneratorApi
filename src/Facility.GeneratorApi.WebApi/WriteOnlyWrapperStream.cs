@@ -1,6 +1,6 @@
-// from http://blog.stephencleary.com/2016/11/streaming-zip-on-aspnet-core.html
 namespace Facility.GeneratorApi.WebApi;
 
+// from http://blog.stephencleary.com/2016/11/streaming-zip-on-aspnet-core.html
 public sealed class WriteOnlyWrapperStream : Stream
 {
 	public WriteOnlyWrapperStream(Stream stream) => m_stream = stream;
