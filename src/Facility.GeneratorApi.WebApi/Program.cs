@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Hosting;
-
 namespace Facility.GeneratorApi.WebApi;
 
 public static class Program

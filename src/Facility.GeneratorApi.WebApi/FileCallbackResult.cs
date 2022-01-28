@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
-// from http://blog.stephencleary.com/2016/11/streaming-zip-on-aspnet-core.html
 namespace Facility.GeneratorApi.WebApi;
 
+// from http://blog.stephencleary.com/2016/11/streaming-zip-on-aspnet-core.html
 internal sealed class FileCallbackResult : FileResult
 {
 	public FileCallbackResult(string contentType, Func<Stream, ActionContext, Task> callback)

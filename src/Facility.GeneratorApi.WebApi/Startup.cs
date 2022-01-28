@@ -2,10 +2,6 @@ using Facility.AspNetCore;
 using Facility.Core.Http;
 using Facility.GeneratorApi.Http;
 using Facility.GeneratorApi.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace Facility.GeneratorApi.WebApi;
 
