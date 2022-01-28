@@ -1,21 +1,14 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Hosting;
+namespace Facility.GeneratorApi.WebApi;
 
-namespace Facility.GeneratorApi.WebApi
+public static class Program
 {
-	public class Program
+	public static void Main()
 	{
-		public static void Main(string[] args)
-		{
-			var host = new WebHostBuilder()
-				.UseKestrel()
-				.UseContentRoot(Directory.GetCurrentDirectory())
-				.UseUrls("http://0.0.0.0:45054")
-				.UseIISIntegration()
-				.UseStartup<Startup>()
-				.Build();
-
-			host.Run();
-		}
+		new WebHostBuilder()
+			.UseKestrel()
+			.UseUrls("http://0.0.0.0:45054")
+			.UseStartup<Startup>()
+			.Build()
+			.Run();
 	}
 }

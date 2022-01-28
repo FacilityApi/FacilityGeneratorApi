@@ -1,26 +1,33 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2041
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{3115FAA4-6EB0-4412-883F-244F1BDA93B2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A219E328-B15A-41FF-BAA5-5F46679EF9C8}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		build.cake = build.cake
-		README.md = README.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fsd", "fsd", "{77EDAF05-3951-41CB-B9D8-CB135D324692}"
-	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
+		.github\workflows\build.yaml = .github\workflows\build.yaml
+		Directory.Build.props = Directory.Build.props
+		dotnet-tools.json = dotnet-tools.json
 		fsd\FacilityGeneratorApi.fsd = fsd\FacilityGeneratorApi.fsd
+		LICENSE = LICENSE
+		nuget.config = nuget.config
+		README.md = README.md
+		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facility.GeneratorApi.WebApi", "src\Facility.GeneratorApi.WebApi\Facility.GeneratorApi.WebApi.csproj", "{246F6910-989A-4551-86C0-1F34EF85C0BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "tools\Build\Build.csproj", "{9D6DC519-8908-4D3A-B16B-118D682BD170}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facility.GeneratorApi", "src\Facility.GeneratorApi\Facility.GeneratorApi.csproj", "{467D7B5D-FC7A-4044-93A5-F1190D4A14F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlDocGen", "tools\XmlDocGen\XmlDocGen.csproj", "{636E5B36-4AA8-47D8-884C-AE4D80B49A14}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facility.GeneratorApi.Services", "src\Facility.GeneratorApi.Services\Facility.GeneratorApi.Services.csproj", "{12C7D650-8918-4A04-9591-C656EA0476A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facility.GeneratorApi", "src\Facility.GeneratorApi\Facility.GeneratorApi.csproj", "{A6BF83C0-057C-4C54-A047-294D86DB59F6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facility.GeneratorApi.Services", "src\Facility.GeneratorApi.Services\Facility.GeneratorApi.Services.csproj", "{115F1895-5E0F-4C8C-B9E6-9337B98598AC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facility.GeneratorApi.WebApi", "src\Facility.GeneratorApi.WebApi\Facility.GeneratorApi.WebApi.csproj", "{FB652511-33E2-4A38-837B-4AA2FE50CB77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,23 +35,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{246F6910-989A-4551-86C0-1F34EF85C0BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{246F6910-989A-4551-86C0-1F34EF85C0BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{246F6910-989A-4551-86C0-1F34EF85C0BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{246F6910-989A-4551-86C0-1F34EF85C0BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{467D7B5D-FC7A-4044-93A5-F1190D4A14F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{467D7B5D-FC7A-4044-93A5-F1190D4A14F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{467D7B5D-FC7A-4044-93A5-F1190D4A14F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{467D7B5D-FC7A-4044-93A5-F1190D4A14F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12C7D650-8918-4A04-9591-C656EA0476A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12C7D650-8918-4A04-9591-C656EA0476A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12C7D650-8918-4A04-9591-C656EA0476A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12C7D650-8918-4A04-9591-C656EA0476A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D6DC519-8908-4D3A-B16B-118D682BD170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D6DC519-8908-4D3A-B16B-118D682BD170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D6DC519-8908-4D3A-B16B-118D682BD170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D6DC519-8908-4D3A-B16B-118D682BD170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{636E5B36-4AA8-47D8-884C-AE4D80B49A14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{636E5B36-4AA8-47D8-884C-AE4D80B49A14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{636E5B36-4AA8-47D8-884C-AE4D80B49A14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{636E5B36-4AA8-47D8-884C-AE4D80B49A14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6BF83C0-057C-4C54-A047-294D86DB59F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6BF83C0-057C-4C54-A047-294D86DB59F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6BF83C0-057C-4C54-A047-294D86DB59F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6BF83C0-057C-4C54-A047-294D86DB59F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{115F1895-5E0F-4C8C-B9E6-9337B98598AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{115F1895-5E0F-4C8C-B9E6-9337B98598AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{115F1895-5E0F-4C8C-B9E6-9337B98598AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{115F1895-5E0F-4C8C-B9E6-9337B98598AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB652511-33E2-4A38-837B-4AA2FE50CB77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB652511-33E2-4A38-837B-4AA2FE50CB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB652511-33E2-4A38-837B-4AA2FE50CB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB652511-33E2-4A38-837B-4AA2FE50CB77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3E035E5F-FD32-400F-8B51-C5837D37A95B}
+		SolutionGuid = {1F4B8E98-2AE0-4191-86AE-28F3FE05E9A5}
 	EndGlobalSection
 EndGlobal

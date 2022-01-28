@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:1.1-sdk AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
 WORKDIR /app
 COPY . /app
@@ -6,7 +6,7 @@ COPY . /app
 RUN dotnet restore
 RUN dotnet publish src/Facility.GeneratorApi.WebApi -c Release -o /app/out
 
-FROM microsoft/dotnet:1.1-runtime
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
 
 WORKDIR /app
 COPY --from=build /app/out /app/out

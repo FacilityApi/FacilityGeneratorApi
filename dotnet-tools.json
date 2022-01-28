@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "fsdgencsharp": {
+      "version": "2.14.5",
+      "commands": [
+        "fsdgencsharp"
+      ]
+    },
+    "fsdgenmd": {
+      "version": "2.4.2",
+      "commands": [
+        "fsdgenmd"
+      ]
+    },
+    "fsdgenjs": {
+      "version": "2.3.0",
+      "commands": [
+        "fsdgenjs"
+      ]
+    },
+    "dotnet-format": {
+      "version": "5.1.250801",
+      "commands": [
+        "dotnet-format"
+      ]
+    },
+    "jetbrains.resharper.globaltools": {
+      "version": "2021.3.2",
+      "commands": [
+        "jb"
+      ]
+    }
+  }
+}
