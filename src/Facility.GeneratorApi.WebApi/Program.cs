@@ -6,7 +6,7 @@ public static class Program
 	{
 		new WebHostBuilder()
 			.UseKestrel()
-			.UseUrls("http://localhost:45054")
+			.UseUrls("http://0.0.0.0:45054")
 			.UseStartup<Startup>()
 			.Build()
 			.Run();
