@@ -1,0 +1,6 @@
+.git/
+src/*/bin/
+src/*/obj/
+tools/*/bin/
+tools/*/obj/
+ts/node_modules/

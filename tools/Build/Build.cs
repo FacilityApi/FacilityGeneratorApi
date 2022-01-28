@@ -65,6 +65,13 @@ return BuildRunner.Execute(args, build =>
 			RunNpmFrom("./ts", "publish");
 		});
 
+	build.Target("build-docker")
+		.Describe("Builds the docker container image.")
+		.Does(() =>
+		{
+			RunApp("docker", "build", ".", "-t", "facilityapi/facility-generator-api");
+		});
+
 	void RunNpmFrom(string directory, params string[] args) =>
 		RunApp("npm",
 			new AppRunnerSettings
