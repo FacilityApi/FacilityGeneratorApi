@@ -14,7 +14,12 @@ public sealed class GenerateResponseDto : ServiceDto<GenerateResponseDto>
 | [Failure](GenerateResponseDto/Failure.md) { get; set; } | The failure, if any. |
 | [Output](GenerateResponseDto/Output.md) { get; set; } | The output from the generator. |
 | override [IsEquivalentTo](GenerateResponseDto/IsEquivalentTo.md)(…) | Determines if two DTOs are equivalent. |
-| override [ToString](GenerateResponseDto/ToString.md)() | Returns the DTO as JSON. |
+
+## Protected Members
+
+| name | description |
+| --- | --- |
+| override [JsonSerializer](GenerateResponseDto/JsonSerializer.md) { get; } | The JSON serializer. |
 
 ## See Also
 

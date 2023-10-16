@@ -1,9 +1,9 @@
-# GetApiInfoRequestDto.ToString method
+# GetApiInfoRequestDto.JsonSerializer property
 
-Returns the DTO as JSON.
+The JSON serializer.
 
 ```csharp
-public override string ToString()
+protected override JsonServiceSerializer JsonSerializer { get; }
 ```
 
 ## See Also

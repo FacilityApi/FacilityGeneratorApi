@@ -14,7 +14,12 @@ public sealed class GenerateRequestDto : ServiceDto<GenerateRequestDto>
 | [Definition](GenerateRequestDto/Definition.md) { get; set; } | The service definition. |
 | [Generator](GenerateRequestDto/Generator.md) { get; set; } | The generator to use. |
 | override [IsEquivalentTo](GenerateRequestDto/IsEquivalentTo.md)(…) | Determines if two DTOs are equivalent. |
-| override [ToString](GenerateRequestDto/ToString.md)() | Returns the DTO as JSON. |
+
+## Protected Members
+
+| name | description |
+| --- | --- |
+| override [JsonSerializer](GenerateRequestDto/JsonSerializer.md) { get; } | The JSON serializer. |
 
 ## See Also
 

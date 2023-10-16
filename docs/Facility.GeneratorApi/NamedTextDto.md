@@ -14,7 +14,12 @@ public sealed class NamedTextDto : ServiceDto<NamedTextDto>
 | [Name](NamedTextDto/Name.md) { get; set; } | The name. |
 | [Text](NamedTextDto/Text.md) { get; set; } | The text. |
 | override [IsEquivalentTo](NamedTextDto/IsEquivalentTo.md)(…) | Determines if two DTOs are equivalent. |
-| override [ToString](NamedTextDto/ToString.md)() | Returns the DTO as JSON. |
+
+## Protected Members
+
+| name | description |
+| --- | --- |
+| override [JsonSerializer](NamedTextDto/JsonSerializer.md) { get; } | The JSON serializer. |
 
 ## See Also
 

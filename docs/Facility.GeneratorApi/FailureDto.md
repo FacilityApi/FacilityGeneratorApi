@@ -15,7 +15,12 @@ public sealed class FailureDto : ServiceDto<FailureDto>
 | [Line](FailureDto/Line.md) { get; set; } | The line number of the failure. |
 | [Message](FailureDto/Message.md) { get; set; } | The failure message. |
 | override [IsEquivalentTo](FailureDto/IsEquivalentTo.md)(…) | Determines if two DTOs are equivalent. |
-| override [ToString](FailureDto/ToString.md)() | Returns the DTO as JSON. |
+
+## Protected Members
+
+| name | description |
+| --- | --- |
+| override [JsonSerializer](FailureDto/JsonSerializer.md) { get; } | The JSON serializer. |
 
 ## See Also
 

@@ -13,7 +13,12 @@ public sealed class GeneratorDto : ServiceDto<GeneratorDto>
 | [GeneratorDto](GeneratorDto/GeneratorDto.md)() | Creates an instance. |
 | [Name](GeneratorDto/Name.md) { get; set; } | The name of the generator. |
 | override [IsEquivalentTo](GeneratorDto/IsEquivalentTo.md)(…) | Determines if two DTOs are equivalent. |
-| override [ToString](GeneratorDto/ToString.md)() | Returns the DTO as JSON. |
+
+## Protected Members
+
+| name | description |
+| --- | --- |
+| override [JsonSerializer](GeneratorDto/JsonSerializer.md) { get; } | The JSON serializer. |
 
 ## See Also
 
