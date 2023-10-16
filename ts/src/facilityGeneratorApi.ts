@@ -38,8 +38,8 @@ class FacilityGeneratorApiHttpClient implements IFacilityGeneratorApi {
 			.then(result => {
 				const status = result.response.status;
 				let value: IGetApiInfoResponse | null = null;
-				if (result.json) {
-					if (status === 200) {
+				if (status === 200) {
+					if (result.json) {
 						value = result.json as IGetApiInfoResponse | null;
 					}
 				}
@@ -62,8 +62,8 @@ class FacilityGeneratorApiHttpClient implements IFacilityGeneratorApi {
 			.then(result => {
 				const status = result.response.status;
 				let value: IGenerateResponse | null = null;
-				if (result.json) {
-					if (status === 200) {
+				if (status === 200) {
+					if (result.json) {
 						value = result.json as IGenerateResponse | null;
 					}
 				}
